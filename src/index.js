@@ -22,7 +22,6 @@ prospectList.addEventListener('click', async(ev)=>{
    try {
         if (ev.target.tagName === 'BUTTON'){
             const idx = ev.target.getAttribute('second-data-id')
-            debugger;
             secondModal.addEventListener('submit', async()=>{
                 const firstName = updateFirstVal.value
                 const lastName = updateSecondtVal.value
@@ -75,7 +74,7 @@ const renderProspects = async() => {
 const fetchProspects = async () =>{
     const response = await axios.get("/api/prospects")
     const prospects = response.data
-    state.prospects = prospects
+    state.prospects = prospects.sort((a, b) => a.id - b.id)
     state.amount = prospects.length
     renderProspects()
 }
