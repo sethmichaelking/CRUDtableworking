@@ -22,7 +22,7 @@ prospectList.addEventListener('click', async(ev)=>{
    try {
         if (ev.target.tagName === 'BUTTON'){
             const idx = ev.target.getAttribute('second-data-id')
-            console.log(idx)
+            debugger;
             secondModal.addEventListener('submit', async()=>{
                 const firstName = updateFirstVal.value
                 const lastName = updateSecondtVal.value
@@ -30,7 +30,6 @@ prospectList.addEventListener('click', async(ev)=>{
                     firstName,
                     lastName
                 })
-                fetchProspects()
             })
         }
     }
@@ -48,6 +47,16 @@ const addtoModal = async()=>{
     console.log('modal')
 }
 
+modalForm.addEventListener('submit', async(ev)=>{
+    const firstName = firstname.value
+    const lastName = lastname.value
+    await axios.post("/api/prospects", {
+        lastName,
+        firstName,
+    })
+    fetchProspects()
+})
+
 const renderProspects = async() => {
     const html = state.prospects.map(prospect => {
         return `
@@ -62,16 +71,6 @@ const renderProspects = async() => {
     }).join('')
     prospectList.innerHTML = html
 }
-
-modalForm.addEventListener('submit', async(ev)=>{
-    const firstName = firstname.value
-    const lastName = lastname.value
-    await axios.post("/api/prospects", {
-        lastName,
-        firstName,
-    })
-    fetchProspects()
-})
 
 const fetchProspects = async () =>{
     const response = await axios.get("/api/prospects")

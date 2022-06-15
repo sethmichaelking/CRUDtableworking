@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const { STRING } = require('sequelize')
+const { STRING, DataTypes } = require('sequelize')
 const db = new Sequelize('crud_table', 'seth.king', 'Poiop90lik8', {
     host: 'localhost',
     dialect: 'postgres'
@@ -7,10 +7,10 @@ const db = new Sequelize('crud_table', 'seth.king', 'Poiop90lik8', {
 
 const Prospect = db.define('prospect', {
     firstName: {
-        type: STRING
+        type: Sequelize.DataTypes.STRING
     },
     lastName: {
-        type: STRING
+        type: Sequelize.DataTypes.STRING
     }
 })
 

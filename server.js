@@ -36,7 +36,12 @@ app.delete('/api/prospects/:id', async(req, res)=>{
 app.put('/api/prospects/:id', async(req, res)=>{
     try{
         const prospect = await Prospect.findByPk(req.params.id)
+        if (prospect){
         prospect.update(req.body)
+        res.sendStatus(200)
+        } else {
+            res.send('prospect isnt here')
+        }
     }
     catch(err){
         console.log(err)
